@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- LANDING NAVIGATION -->
+<nav class="landing-navbar">
+    <div class="footer-logo">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+        <span style="font-family:'Outfit',sans-serif; font-size:1.3rem; font-weight:800;">EcoQuest</span>
+    </div>
+    
+    <div style="display: flex; gap: 15px;">
+        <a href="{{ url_for('login') }}" class="btn-secondary" onclick="playSFX('click')" style="padding: 8px 20px; font-size: 0.9rem;">Sign In</a>
+        <a href="{{ url_for('signup') }}" class="btn-primary" onclick="playSFX('click')" style="padding: 8px 20px; font-size: 0.9rem;">Get Started</a>
+    </div>
+</nav>
+
+<!-- HERO HEADER SECTION -->
+<section class="hero-section">
+    <div class="hero-content">
+        <span class="hero-tag">Learn, Play & Protect 🌍</span>
+        <h1 class="hero-title">Gamified Learning For Our <span class="text-gradient-green">Planet's Future</span></h1>
+        <p class="hero-desc">
+            Combine the gamified fun of Duolingo and Kahoot with simulation games! Explore environmental modules, build a sustainable city, plant a virtual eco-garden, track carbon output, and solve riddles to protect the environment.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('signup') }}" class="btn-primary" onclick="playSFX('click')">Create Free Account 🚀</a>
+            <a href="#features" class="btn-secondary" onclick="playSFX('click')">Explore Games &rarr;</a>
+        </div>
+    </div>
+    
+    <div class="hero-graphic">
+        <div class="earth-container">
+            <!-- Animated Orbit Line -->
+            <div class="earth-orbit">
+                <div class="orbit-satellite">🛰️</div>
+            </div>
+            <!-- Dynamic Earth Vector -->
+            <svg class="earth-svg" viewBox="0 0 100 100">
+                <!-- Deep Ocean base -->
+                <circle cx="50" cy="50" r="48" fill="#1565c0"/>
+                <!-- Green continents -->
+                <path d="M20,40 Q25,30 35,35 T50,25 T65,40 T45,60 T25,50 Z" fill="#2e7d32"/>
+                <path d="M55,60 Q70,50 85,55 T90,75 T70,80 T50,70 Z" fill="#2e7d32"/>
+                <path d="M30,70 Q40,75 35,85 T20,80 Z" fill="#2e7d32"/>
+                <path d="M40,15 Q50,10 60,15 T50,22 Z" fill="#2e7d32"/>
+                <!-- Ice caps -->
+                <path d="M30,8 Q50,15 70,8 C60,2 40,2 30,8 Z" fill="#e0f7fa"/>
+                <path d="M35,92 Q50,86 65,92 C55,98 45,98 35,92 Z" fill="#e0f7fa"/>
+                <!-- Atmospheric glow ring -->
+                <circle cx="50" cy="50" r="48" fill="none" stroke="#80deea" stroke-width="1.5" opacity="0.3"/>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<!-- ENVIRONMENTAL STATS GRID -->
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-item glass-card">
+            <div class="stat-num" id="stat-trees">142K+</div>
+            <div class="stat-label">Virtual Trees Grown</div>
+        </div>
+        <div class="stat-item glass-card">
+            <div class="stat-num" id="stat-co2">250T+</div>
+            <div class="stat-label">Calculated CO2 Offsets</div>
+        </div>
+        <div class="stat-item glass-card">
+            <div class="stat-num" id="stat-quizzes">840K+</div>
+            <div class="stat-label">Quizzes Completed</div>
+        </div>
+        <div class="stat-item glass-card">
+            <div class="stat-num" id="stat-users">18K+</div>
+            <div class="stat-label">Climate Champions</div>
+        </div>
+    </div>
+</section>
+
+<!-- PLATFORM FEATURES -->
+<section id="features" class="features-section">
+    <div class="section-header">
+        <h2 class="text-gradient-blue">An Interactive Eco Ecosystem</h2>
+        <p>Explore games, simulators, and calculators designed to make environmental education highly engaging and action-oriented.</p>
+    </div>
+    
+    <div class="features-grid">
+        <div class="feature-card glass-card">
+            <div class="feature-icon-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+            </div>
+            <h3>Learning Syllabus</h3>
+            <p>8 comprehensive modules covering Climate Change, Pollution, Waste, Renewables, and Deforestation. Complete lessons to earn Eco Coins.</p>
+        </div>
+        
+        <div class="feature-card glass-card">
+            <div class="feature-icon-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0-2-.9-2V5c0-1.1-.9-2-2-2z"/></svg>
+            </div>
+            <h3>Interactive City Simulator</h3>
+            <p>Construct clean power grids, recycling centers, and forest reserves. Watch live air quality and citizen happiness scores recalculate.</p>
+        </div>
+        
+        <div class="feature-card glass-card">
+            <div class="feature-icon-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </div>
+            <h3>Virtual Canvas Garden</h3>
+            <p>Buy seeds using your earned coins and nurture them from seed to sprout. Water, fertilize, and grow a diverse forest ecosystem.</p>
+        </div>
+        
+        <div class="feature-card glass-card">
+            <div class="feature-icon-wrapper">
+                <svg viewBox="0 0 24 24"><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1z"/></svg>
+            </div>
+            <h3>Sorting & Segregation Game</h3>
+            <p>A fast-paced drag-and-drop game. Sort plastic containers, batteries, and organic peels into correct bins under time limits.</p>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="features-section" style="background: rgba(15,23,42,0.2); border-top:1px solid var(--glass-border);">
+    <div class="section-header">
+        <h2>What Educators Say</h2>
+    </div>
+    <div class="features-grid">
+        <div class="feature-card glass-card">
+            <p style="font-style: italic; margin-bottom: 20px; font-size: 0.95rem;">
+                "EcoQuest transformed my environmental science class. Students who used to doze off during slide presentations are now competing to top the weekly leaderboard!"
+            </p>
+            <h4 style="color:var(--accent-green);">Professor Green, Academic Lead</h4>
+        </div>
+        <div class="feature-card glass-card">
+            <p style="font-style: italic; margin-bottom: 20px; font-size: 0.95rem;">
+                "The city builder simulator teaches resource trade-offs perfectly. Placing solar panels is no longer abstract, they see air quality indicators improve immediately."
+            </p>
+            <h4 style="color:var(--accent-blue);">Elena Rostova, High School Teacher</h4>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="landing-footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+            <span style="font-family:'Outfit',sans-serif;">EcoQuest</span>
+        </div>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">Empowering youth to learn, play, and protect our environment.</p>
+        <div class="footer-socials">
+            <a href="#" class="social-icon">𝕏</a>
+            <a href="#" class="social-icon">💬</a>
+            <a href="#" class="social-icon">🐙</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 EcoQuest Educational Systems. Crafted for Hackathons and college project showcases.
+    </div>
+</footer>
+{% endblock %}

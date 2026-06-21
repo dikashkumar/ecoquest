@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block header_title %}Virtual Eco Garden{% endblock %}
+{% block header_subtitle %}Spend Eco Coins to plant seeds, water them, and watch your forest grow!{% endblock %}
+
+{% block content %}
+<div class="garden-dashboard">
+    <!-- LEFT PANEL: CANVAS GAME BOARD -->
+    <div class="glass-card garden-board">
+        <canvas id="gardenCanvas" class="garden-canvas"></canvas>
+    </div>
+    
+    <!-- RIGHT PANEL: CONTROL STATION & SHOP -->
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Inspect Plant Box -->
+        <div class="glass-card" style="padding: 20px;">
+            <h4 style="margin-bottom: 15px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; color: var(--text-secondary);">Selected Plant</h4>
+            <div id="plant-actions-panel">
+                <div style="text-align: center; color: var(--text-secondary); padding: 20px 0;">
+                    <p style="font-size:0.85rem;">Select a plant in the garden to inspect details, water, or fertilize it.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seeds Shop Box -->
+        <div class="glass-card garden-shop">
+            <h4 style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; color: var(--text-secondary); margin: 0;">Seeds Shop</h4>
+            
+            <div class="shop-seed-grid">
+                <!-- Seed 1: Lavender -->
+                <div class="seed-card" data-seed-type="lavender" onclick="selectSeed(this, 'lavender')">
+                    <div class="seed-info">
+                        <span class="seed-icon">🪻</span>
+                        <div class="seed-details">
+                            <h4>Lavender</h4>
+                            <p>Cost: 15c</p>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue);">Select</span>
+                </div>
+                
+                <!-- Seed 2: Rose -->
+                <div class="seed-card" data-seed-type="rose" onclick="selectSeed(this, 'rose')">
+                    <div class="seed-info">
+                        <span class="seed-icon">🌹</span>
+                        <div class="seed-details">
+                            <h4>Rose Bush</h4>
+                            <p>Cost: 20c</p>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue);">Select</span>
+                </div>
+
+                <!-- Seed 3: Pine -->
+                <div class="seed-card" data-seed-type="pine" onclick="selectSeed(this, 'pine')">
+                    <div class="seed-info">
+                        <span class="seed-icon">🌲</span>
+                        <div class="seed-details">
+                            <h4>Pine Tree</h4>
+                            <p>Cost: 30c</p>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue);">Select</span>
+                </div>
+
+                <!-- Seed 4: Oak -->
+                <div class="seed-card" data-seed-type="oak" onclick="selectSeed(this, 'oak')">
+                    <div class="seed-info">
+                        <span class="seed-icon">🌳</span>
+                        <div class="seed-details">
+                            <h4>Oak Tree</h4>
+                            <p>Cost: 50c</p>
+                        </div>
+                    </div>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue);">Select</span>
+                </div>
+            </div>
+            
+            <p style="font-size: 0.7rem; color: var(--text-secondary); margin: 0; line-height: 1.4;">
+                * Select a seed card above, then click on the soil beds inside the canvas garden to plant it!
+            </p>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/garden.js') }}"></script>
+{% endblock %}

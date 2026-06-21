@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoQuest – Learn, Play & Protect the Planet</title>
+    
+    <!-- CSS Layouts -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Background Particles Overlay -->
+    <canvas id="particles-bg"></canvas>
+    
+    <div class="app-container">
+        {% if current_user.is_authenticated %}
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                <span>EcoQuest</span>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="{% if request.path == '/dashboard' %}active{% endif %}">
+                    <a href="{{ url_for('dashboard') }}">
+                        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/learning' %}active{% endif %}">
+                    <a href="{{ url_for('learning') }}">
+                        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.18 11.5L12 15.22l6.82-3.72-6.82-3.72-6.82 3.72z"/></svg>
+                        <span>Learning Zone</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/quiz' %}active{% endif %}">
+                    <a href="{{ url_for('quiz') }}">
+                        <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.5-7.58c0 1.58-1.5 2.1-2.5 3.15v.43h-2v-.86c0-1.58 1.5-2.1 2.5-3.15.58-.58.5-1.58-.2-2-.55-.3-1.25-.1-1.6.45-.4.5-.4 1.15-.4 1.6H7.3c0-.85.1-1.7.55-2.4C8.9 6.2 10.5 5.5 12 5.5s3.1.7 4 1.8c.65.8.5 2-.5 3.12z"/></svg>
+                        <span>Quiz Zone</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/game/waste' %}active{% endif %}">
+                    <a href="{{ url_for('game_waste') }}">
+                        <svg viewBox="0 0 24 24"><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/></svg>
+                        <span>Sorting Game</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/story' %}active{% endif %}">
+                    <a href="{{ url_for('story') }}">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <span>Adventure Quest</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/garden' %}active{% endif %}">
+                    <a href="{{ url_for('garden') }}">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93z"/></svg>
+                        <span>Eco Garden</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/city' %}active{% endif %}">
+                    <a href="{{ url_for('city') }}">
+                        <svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zm-2 12H4v-2h6v2zm0-4H4v-2h6v2zm0-4H4V9h6v2zm0-4H4V5h6v2zm10 12h-8v-2h8v2zm0-4h-8v-2h8v2zm0-4h-8V9h8v2z"/></svg>
+                        <span>City Simulator</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/calculator' %}active{% endif %}">
+                    <a href="{{ url_for('calculator') }}">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 6h-2v2h2v-2zm0 4h-2v2h2v-2zm-4-4H9v2h2v-2zm0 4H9v2h2v-2zM7 7h10v1H7V7zm8 10H9v1h6v-1z"/></svg>
+                        <span>Carbon Calc</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/treasure' %}active{% endif %}">
+                    <a href="{{ url_for('treasure') }}">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93z"/></svg>
+                        <span>Treasure Hunt</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/poster' %}active{% endif %}">
+                    <a href="{{ url_for('poster') }}">
+                        <svg viewBox="0 0 24 24"><path d="M3 5v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2zm12 4c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm-9 9c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1H6v-1z"/></svg>
+                        <span>Poster Corner</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/chatbot' %}active{% endif %}">
+                    <a href="{{ url_for('chatbot') }}">
+                        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                        <span>Eco Chatbot</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/achievements' %}active{% endif %}">
+                    <a href="{{ url_for('achievements') }}">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93z"/></svg>
+                        <span>Achievements</span>
+                    </a>
+                </li>
+                {% if current_user.is_admin %}
+                <li class="{% if request.path == '/admin' %}active{% endif %}">
+                    <a href="{{ url_for('admin') }}">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <span>Admin Panel</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar">{{ current_user.username[0].upper() }}</div>
+                    <div class="sidebar-user-info">
+                        <h4>{{ current_user.username }}</h4>
+                        <p>Level {{ current_user.level }} Eco-Quest</p>
+                    </div>
+                </div>
+                <a href="{{ url_for('logout') }}" onclick="playSFX('click')" class="btn-secondary" style="text-align: center; font-size: 0.8rem; padding: 6px 0;">Sign Out &rarr;</a>
+            </div>
+        </aside>
+        {% endif %}
+        
+        <!-- MAIN SECTION -->
+        <main class="main-content" style="{% if not current_user.is_authenticated %}margin-left: 0; padding: 0;{% endif %}">
+            {% if current_user.is_authenticated %}
+            <!-- HEADER CONTAINER -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>{% block header_title %}EcoQuest{% endblock %}</h1>
+                    <p>{% block header_subtitle %}Learn, Play & Protect the Planet{% endblock %}</p>
+                </div>
+                
+                <div class="header-actions">
+                    <!-- Status Stats Box -->
+                    <div class="user-status-badges">
+                        <div class="status-badge xp">
+                            <span>🌱</span> <span id="header-xp">{{ current_user.xp }}</span> XP
+                        </div>
+                        <div class="status-badge coins">
+                            <span>🪙</span> <span id="header-coins">{{ current_user.eco_coins }}</span> Coins
+                        </div>
+                        <div class="status-badge streak">
+                            <span>🔥</span> <span id="header-streak">{{ current_user.streak }}</span> Day Streak
+                        </div>
+                    </div>
+                    
+                    <!-- Theme toggler -->
+                    <button id="theme-toggle" class="theme-toggle-btn">
+                        <!-- Initial icon filled by main.js -->
+                    </button>
+                    
+                    <!-- Menu hamburger toggle on mobile -->
+                    <button class="mobile-menu-toggle">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                    </button>
+                </div>
+            </header>
+            {% endif %}
+            
+            <!-- Alert flashes -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                    {% for category, message in messages %}
+                        <div class="glass-card" style="padding: 16px; border-left: 4px solid {% if category == 'danger' %}var(--accent-red){% else %}var(--accent-green){% endif %}; font-size: 0.9rem;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

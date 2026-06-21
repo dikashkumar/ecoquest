@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block header_title %}Adventure Quest{% endblock %}
+{% block header_subtitle %}Embark on narrative environmental missions to help local communities solve ecological challenges{% endblock %}
+
+{% block content %}
+<div class="glass-card" style="padding: 30px; min-height: 480px; display: flex; flex-direction: column; justify-content: center;">
+    
+    <!-- 1. ADVENTURE MAP VIEW -->
+    <div id="story-map-view">
+        <h3 style="text-align: center; margin-bottom: 50px; font-size: 1.4rem;">Eco Adventure Roadmap</h3>
+        
+        <div class="story-map">
+            <!-- Connection Line -->
+            <div class="story-line-connect"></div>
+            
+            <!-- Node 1: Clean River -->
+            <div class="story-node unlocked" data-level="1" onclick="startStory(1)">
+                <span>🌊</span>
+                <div class="story-node-label">1. Clean River</div>
+            </div>
+            
+            <!-- Node 2: Save Forest -->
+            <div class="story-node locked" data-level="2">
+                <span>🌲</span>
+                <div class="story-node-label">2. Save Forest</div>
+            </div>
+            
+            <!-- Node 3: Reduce Plastic -->
+            <div class="story-node locked" data-level="3">
+                <span>🥤</span>
+                <div class="story-node-label">3. Reduce Plastic</div>
+            </div>
+            
+            <!-- Node 4: Wildlife Rescue -->
+            <div class="story-node locked" data-level="4">
+                <span>🦁</span>
+                <div class="story-node-label">4. Save Wildlife</div>
+            </div>
+            
+            <!-- Node 5: Green City -->
+            <div class="story-node locked" data-level="5">
+                <span>🏙️</span>
+                <div class="story-node-label">5. Green City</div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: var(--text-secondary); margin-top: 60px; font-size: 0.9rem;">
+            * Complete quests in order to unlock future story stages.
+        </p>
+    </div>
+    
+    <!-- 2. CHARACTER DIALOGUE VIEW (Hidden initially) -->
+    <div id="story-dialogue-view" class="story-dialogue-card" style="display: none;">
+        <!-- Character Avatar & Dialogue Bubble -->
+        <div class="story-character-zone">
+            <div class="character-avatar" id="char-avatar-container">
+                <!-- SVG injected via JS -->
+            </div>
+            
+            <div class="dialogue-bubble">
+                <div class="dialogue-speaker" id="dialogue-speaker-name">Marina</div>
+                <div class="dialogue-text" id="dialogue-content-text">
+                    Loading dialog...
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Choices Grid -->
+        <div id="choices-container" class="story-choices">
+            <!-- Buttons injected via JS -->
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/story.js') }}"></script>
+{% endblock %}
