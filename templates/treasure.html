@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block header_title %}Environmental Treasure Hunt{% endblock %}
+{% block header_subtitle %}Decode environmental clues, solve riddles, and discover hidden green tips to unlock coins{% endblock %}
+
+{% block content %}
+<div class="glass-card" id="treasure-riddle-panel" style="max-width: 750px; margin: 40px auto; padding: 30px;">
+    <!-- Injected dynamically via static/js/treasure.js -->
+    <div style="text-align: center; padding: 40px 0;">
+        <p>Loading environmental riddles...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/treasure.js') }}"></script>
+{% endblock %}

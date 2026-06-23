@@ -5,10 +5,11 @@ from models import db, User, DailyChallenge, UserChallenge, Badge
 from database import init_db
 from chatbot import get_bot_response
 import json
+import os
 from datetime import datetime, date
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'ecoquest-secret-key-12345'
+app = Flask(__name__, template_folder='templates', static_folder='static')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ecoquest-secret-key-12345')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecoquest.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -73,7 +74,7 @@ def signup():
             flash('Username or Email already registered!', 'danger')
             return redirect(url_for('signup'))
             
-        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        hashed_password = generate_password_hash(password)
         new_user = User(
             username=username,
             email=email,
@@ -147,7 +148,7 @@ def forgot():
         new_password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
         if user:
-            user.password_hash = generate_password_hash(new_password, method='pbkdf2:sha256')
+            user.password_hash = generate_password_hash(new_password)
             db.session.commit()
             flash('Password reset successfully! Please log in.', 'success')
             return redirect(url_for('login'))

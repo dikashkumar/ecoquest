@@ -44,7 +44,9 @@ class User(db.Model, UserMixin):
             'lessons_completed': self.lessons_completed,
             'quizzes_completed': self.quizzes_completed,
             'games_played': self.games_played,
-            'challenges_completed': self.challenges_completed
+            'challenges_completed': self.challenges_completed,
+            'city_state': self.city_state,
+            'garden_state': self.garden_state
         }
 
 class DailyChallenge(db.Model):
