@@ -736,3 +736,43 @@ input.wrong {
         justify-content: center;
     }
 }
+
+/* Landing-page overrides */
+body { overflow-x: hidden; }
+
+.feature-icon-wrapper svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+.earth-container {
+    width: clamp(240px, 40vw, 420px);
+    height: clamp(240px, 40vw, 420px);
+}
+
+@media (max-width: 860px) {
+    .hero-section {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 120px;
+        gap: 40px;
+    }
+    .hero-content { max-width: 100%; }
+    .hero-actions { justify-content: center; }
+    .earth-container {
+        width: clamp(200px, 50vw, 320px);
+        height: clamp(200px, 50vw, 320px);
+    }
+}
+
+.features-grid .feature-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.orbit-satellite {
+    transform: translateY(-50%);
+}
