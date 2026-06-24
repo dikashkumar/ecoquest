@@ -10,7 +10,20 @@ from datetime import datetime, date
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ecoquest-secret-key-12345')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecoquest.db'
+
+# Dynamically set DB URI and copy seeded DB for Vercel read-only filesystem environment
+if os.environ.get('VERCEL'):
+    db_path = '/tmp/ecoquest.db'
+    if not os.path.exists(db_path) and os.path.exists('ecoquest.db'):
+        import shutil
+        try:
+            shutil.copy('ecoquest.db', db_path)
+        except Exception as e:
+            print(f"Error copying seeded database to /tmp: {e}")
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ecoquest.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize DB and seed
